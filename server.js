@@ -20,6 +20,7 @@ app.post('/send', (req, res) => {
         <h3>Contact Details</h3>
             <li>Name: ${req.body.name}</li>
             <li>Email: ${req.body.email}</li>
+    
         <h3>Message</h3>
         <p>${req.body.message}</p>
     `;
@@ -36,7 +37,7 @@ app.post('/send', (req, res) => {
         const mailOptions = {
             from: process.env.EMAIL,
             to: process.env.MY_EMAIL,
-            subject: "New Contact Request",
+            subject: req.body.subject,
             html: output
         }
         transporter.sendMail(mailOptions, (err, info) => {
